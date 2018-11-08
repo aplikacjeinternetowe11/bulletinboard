@@ -23,8 +23,9 @@ public class UserController {
                                @RequestParam(value = "password", defaultValue = " ") String password,
                                @RequestParam(value = "phone_number", defaultValue = " ") String phone_number){
 
+        String redirectUrl = "/";
 
         userService.addUser(username,password,phone_number);
-        return "index";
+        return "redirect:" + redirectUrl;
     }
 }
