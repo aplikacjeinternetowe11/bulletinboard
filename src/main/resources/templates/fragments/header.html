@@ -12,6 +12,8 @@
         <button>Zarejestruj</button></a>
     <a sec:authorize="isAnonymous()" th:href="@{/user/login}">
         <button>Zaloguj</button></a>
+    <a sec:authorize="isAuthenticated()" th:href="@{/add_item}">
+        <button>Dodaj ogłoszenie</button></a>
     <a th:href="@{/user/test_dostepu}">
         <button>Test dostepu</button></a>
     <a sec:authorize="isAuthenticated()" th:href="@{/logout}">
