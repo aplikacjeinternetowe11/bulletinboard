@@ -16,6 +16,7 @@ public class UserController {
 
     @RequestMapping(value = "/register",method = RequestMethod.GET)
     public String registerUserPanel(){
+
         return "register";
     }
     @RequestMapping(value = "/register", method = RequestMethod.POST)
@@ -27,5 +28,14 @@ public class UserController {
 
         userService.addUser(username,password,phone_number);
         return "redirect:" + redirectUrl;
+    }
+
+    @RequestMapping(value = "/login",method = RequestMethod.GET)
+    public String loginUserPanel(){
+        return "login";
+    }
+    @RequestMapping(value = "test_dostepu",method = RequestMethod.GET)
+    public String testDostepu(){
+        return "index";
     }
 }
