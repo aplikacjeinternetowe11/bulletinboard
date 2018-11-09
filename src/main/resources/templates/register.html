@@ -1,21 +1,21 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8"/>
     <title>Rejestracja</title>
 </head>
 <body>
 <div th:replace="fragments/header :: header"/>
-<h1>
+<h1 sec:authorize="isAnonymous()">
     Witaj! Zarejestruj się!
 </h1>
-<form method="post">
+<form sec:authorize="isAnonymous()" method="post">
     Nazwa użytkownika: <input type="text" name="username"/><br/><br/>
     Hasło: <input type="password" name="password"/><br/><br/>
     Numer telefonu: <input type="text" name="phone_number"/><br/><br/>
     <button type="submit">Zarejestruj</button>
     <br/><br/><br/>
 </form>
-
+<div sec:authorize="isAuthenticated()">Jesteś już zarejestrowany!</div>
 </body>
 </html>
