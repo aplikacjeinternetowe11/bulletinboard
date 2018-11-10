@@ -14,4 +14,14 @@ public class UserDao {
         jdbcTemplate.update(sql, new Object[]{username,password,phone_number});
 
     }
+
+    public String getUserPhoneNumberByItemId(int id) {
+        String sql1 = "SELECT user_name FROM item WHERE item_id=?";
+        String userName;
+        userName = jdbcTemplate.queryForObject(sql1,new Object[]{id}, String.class);
+        String sql2 = "SELECT phone_number FROM user WHERE user_name=?";
+        String phoneNumber;
+        phoneNumber = jdbcTemplate.queryForObject(sql2, new Object[]{userName}, String.class);
+        return phoneNumber;
+    }
 }

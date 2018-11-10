@@ -26,4 +26,11 @@ public class BoardDao {
         return items;
 
     }
+
+    public Item showItemDescription(int id) {
+        String sql = "SELECT item_id,user_name,item_name,item_description,date,item_price FROM item WHERE item_id=?";
+        Item item1;
+        item1 = (Item) jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper(Item.class),id);
+        return item1;
+    }
 }

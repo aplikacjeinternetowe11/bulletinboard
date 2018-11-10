@@ -7,7 +7,7 @@
 <body>
 <div th:replace="fragments/header :: header"/>
 <div th:each="item : ${itemList}">
-    <table class="table table-striped" style="width: 55%; border: solid #e9ecef">
+    <table style="width: 55%; border: solid #e9ecef">
     <tr style="font-weight:bold">
         <td>Nazwa sprzedawcy:</td>
         <td>Cena:</td>
@@ -28,7 +28,12 @@
     <tr>
         <td colspan="5" th:text="${#strings.abbreviate(item.item_name,90)}"></td>
     </tr>
+
+
     </table>
+    <form th:action="@{'/item/'+${item.item_id}}" method="get">
+        <button type="submit">Szczegóły</button>
+    </form>
 </div>
 
 </body>

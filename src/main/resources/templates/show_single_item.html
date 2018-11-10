@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Szczegóły ogłoszenia</title>
+</head>
+<body>
+<div th:replace="fragments/header :: header"/>
+
+<table style="border: solid #e9ecef;">
+    <tr style="font-weight:bold">
+        <td>Nazwa sprzedawcy:</td>
+        <td>Cena:</td>
+        <td>Data dodania:</td>
+        <td>Numer telefonu:</td>
+    </tr>
+    <tr>
+        <td th:text="${item_description.user_name}"></td>
+        <td th:text="${item_description.item_price}+zł"></td>
+        <td th:text="${item_description.date}"></td>
+        <td max-height="100px">
+
+            <span sec:authorize="isAnonymous()" style="word-break: keep-all">Zaloguj się, by zobaczyć numer telefonu sprzedawcy.</span>
+            <div sec:authorize="isAuthenticated()"><span style="font-weight:normal" th:text="${phone_number}"></span>
+            </div>
+
+        </td>
+    </tr>
+    <tr>
+        <th colspan="6" style="text-align: left">Nazwa przedmiotu:</th>
+    </tr>
+    <tr>
+        <td colspan="6" th:text="${item_description.item_name}"></td>
+    </tr>
+
+    <tr>
+        <th colspan="6" style="text-align: left">Opis ogłoszenia:</th>
+    </tr>
+    <tr>
+        <td colspan="6" th:text="${item_description.item_description}"></td>
+    </tr>
+</table>
+
+</body>
+</html>

@@ -19,4 +19,8 @@ public class BoardService {
     public Collection<Item> showItems() {
         return this.boardDao.showItems();
     }
+
+    public Item showItemDescription(int id) {
+        return this.boardDao.showItemDescription(id);
+    }
 }
