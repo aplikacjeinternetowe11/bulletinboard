@@ -15,7 +15,7 @@
     </tr>
     <tr>
         <td style="width: 25%">
-            <a th:text="${item.user_name}"/>
+            <a th:href="@{'/user/user_profile/'+${item.user_name}}" th:text="${item.user_name}"/>
         </td>
 
         <td style="width: 15%" th:text="${item.item_price}+zł"></td>

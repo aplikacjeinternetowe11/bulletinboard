@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Profil użytkownika</title>
+</head>
+<body>
+<div th:replace="fragments/header :: header"/>
+
+
+<div>
+    <div style="display: inline;font-weight:bold">Nazwa użytkownika:</div>
+    <div style="display: inline;" th:text="${user_details.user_name}"></div>
+</div>
+
+<div>
+    <div style="display: inline;font-weight:bold">Numer telefonu:</div>
+    <div sec:authorize="isAuthenticated()" style="display: inline;" th:text="${user_details.phone_number}"></div>
+    <div sec:authorize="isAnonymous()" style="display: inline;">Zaloguj się, aby zobaczyć numer telefonu</div>
+
+</div>
+<br/>
+<form th:action="@{'/user/user_profile/'+${user_details.user_name}+'/items'}" method="get">
+    <button class="btn btn-default" type="submit">Ogłoszenia użytkownika</button>
+</form>
+
+</body>
+</html>

@@ -51,7 +51,7 @@ public class BoardController {
 
     @RequestMapping(value = "/item/{id}", method = RequestMethod.GET)
     public String showSingleItem(@PathVariable("id") int id,Model model){
-        System.out.print(id);
+
         model.addAttribute("item_description",boardService.showItemDescription(id));
         model.addAttribute("phone_number",userService.getUserPhoneNumberByItemId(id));
 
