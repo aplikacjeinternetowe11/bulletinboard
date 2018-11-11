@@ -39,7 +39,11 @@
     <tr>
         <td colspan="6" th:text="${item_description.item_description}"></td>
     </tr>
-</table>
 
+</table>
+<form sec:authorize="hasRole('ROLE_ADMIN')" th:action="@{'/admin/delete/item'}" method="post">
+    <input type="hidden" th:value="${item_description.item_id}" th:name="id"/>
+    <button class="btn btn-default" type="submit">Usuń</button>
+</form>
 </body>
 </html>

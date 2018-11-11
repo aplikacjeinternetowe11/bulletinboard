@@ -10,11 +10,11 @@
     Witaj! Zarejestruj się!
 </h1>
 <form sec:authorize="isAnonymous()" method="post">
-    Nazwa użytkownika: <input type="text" name="username"/><br/><br/>
-    Hasło: <input type="password" name="password"/><br/><br/>
-    Numer telefonu: <input type="text" name="phone_number"/><br/><br/>
-    <button type="submit">Zarejestruj</button>
-    <br/><br/><br/>
+    Nazwa użytkownika: <input type="text" class="form-control" style="width: 20%" name="username"/><br/>
+    Hasło: <input type="password" class="form-control" style="width: 20%" name="password"/><br/>
+    Numer telefonu: <input type="text" class="form-control" style="width: 20%" name="phone_number"/><br/>
+    <button class="btn btn-default" type="submit">Zarejestruj</button>
+
 </form>
 <div sec:authorize="isAuthenticated()">Jesteś już zarejestrowany!</div>
 </body>

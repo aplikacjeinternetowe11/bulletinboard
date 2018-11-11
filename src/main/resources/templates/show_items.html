@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8"/>
     <title>Lista ogłoszeń</title>
@@ -32,9 +32,14 @@
 
     </table>
 
-    <form th:action="@{'/item/'+${item.item_id}}" method="get">
+    <form style="display: inline" th:action="@{'/item/'+${item.item_id}}" method="get">
         <button class="btn btn-default" type="submit">Szczegóły</button>
     </form>
+    <form style="display: inline" sec:authorize="hasRole('ROLE_ADMIN')" th:action="@{'/admin/delete/item'}" method="post">
+        <input type="hidden" th:value="${item.item_id}" th:name="id"/>
+        <button class="btn btn-default" type="submit">Usuń</button>
+    </form>
+    <form></form>
     <br/>
 </div>
 

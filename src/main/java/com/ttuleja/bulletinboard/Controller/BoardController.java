@@ -38,7 +38,7 @@ public class BoardController {
 
         boardService.addItem(itemName,itemDescription,itemPrice,userName);
 
-        String redirectUrl = "/";
+        String redirectUrl = "/show_items";
         return "redirect:" + redirectUrl;
     }
 
