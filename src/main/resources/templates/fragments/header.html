@@ -6,23 +6,28 @@
 </head>
 <body>
 <div th:fragment="header">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <hr class="hr-primary"/>
+    <ol class="breadcrumb bread-primary ">
     <a th:href="@{/}">
-        <button>Strona główna</button></a>
+        <button class="btn btn-primary">Strona główna</button></a>
     <a sec:authorize="isAnonymous()" th:href="@{/user/register}">
-        <button>Zarejestruj</button></a>
+        <button class="btn btn-primary">Zarejestruj</button></a>
     <a sec:authorize="isAnonymous()" th:href="@{/user/login}">
-        <button>Zaloguj</button></a>
+        <button class="btn btn-primary">Zaloguj</button></a>
     <a sec:authorize="isAuthenticated()" th:href="@{/add_item}">
-        <button>Dodaj ogłoszenie</button></a>
+        <button class="btn btn-primary">Dodaj ogłoszenie</button></a>
     <a th:href="@{/show_items}">
-        <button>Lista ogłoszeń</button></a>
+        <button class="btn btn-primary">Lista ogłoszeń</button></a>
     <a th:href="@{/user/test_dostepu}">
-        <button>Test dostepu</button></a>
+        <button class="btn btn-primary">Test dostepu</button></a>
     <a sec:authorize="isAuthenticated()" th:href="@{/logout}">
-        <button>Wyloguj</button></a>
+        <button class="btn btn-primary">Wyloguj</button></a>
     <div sec:authorize="isAuthenticated()" th:inline="text" style="float:right; margin-right: 5px">
         Zalogowany jako: [[${#httpServletRequest.remoteUser}]]
     </div>
+    </ol>
 </div>
 </body>
 </html>
