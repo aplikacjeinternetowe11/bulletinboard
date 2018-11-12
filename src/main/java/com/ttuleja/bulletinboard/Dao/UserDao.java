@@ -1,5 +1,6 @@
 package com.ttuleja.bulletinboard.Dao;
 
+import com.ttuleja.bulletinboard.Entity.Comment;
 import com.ttuleja.bulletinboard.Entity.Item;
 import com.ttuleja.bulletinboard.Entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,10 +39,18 @@ public class UserDao {
         return userDetails;
     }
 
-    public Collection<Item> getUserPosts(String userName) {
+    public Collection<Item> getUserItems(String userName) {
         String sql  = "SELECT * FROM item WHERE user_name=?";
         Collection<Item> userItems;
         userItems = (Collection<Item>) jdbcTemplate.query(sql, new BeanPropertyRowMapper(Item.class),userName);
         return userItems;
+    }
+
+    public Collection<Comment> getUserComments(String userName) {
+        String sql  = "SELECT * FROM comment WHERE comment_target=?";
+        Collection<Comment> userComments;
+        userComments = (Collection<Comment>) jdbcTemplate.query(sql, new BeanPropertyRowMapper(Comment.class),userName);
+        return userComments;
+
     }
 }

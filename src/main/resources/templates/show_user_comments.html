@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Komentarze użytkownika</title>
+</head>
+<body>
+<div th:replace="fragments/header :: header"/>
+
+<form th:action="@{'/user/user_profile/'+${user_name}}" method="get">
+    <button class="btn btn-default" type="submit">Powrót do profilu użytkownika</button>
+</form>
+<br/>
+<div>
+    <div style="font-weight:bold;display: inline">Komentarze użytkownika:</div>
+    <div style="display: inline" th:text="${user_name}"></div>
+</div>
+<br/>
+<div th:each="comment : ${user_comments}">
+    <table class="table table-striped" style="width: 30%">
+        <tr style="font-weight:bold">
+            <td>Autor:</td>
+            <td>Data dodania:</td>
+        </tr>
+        <tr>
+            <td style="width: 15%" th:text="${comment.comment_author}"></td>
+            <td style="width: 20%" th:text="${comment.comment_date}"></td>
+        </tr>
+
+        <tr>
+            <th colspan="5" style="width: 100%; text-align: left">Treść komentarza:</th>
+        </tr>
+        <tr>
+            <td colspan="5" th:text="${comment.comment_content}"></td>
+        </tr>
+
+<br/>
+    </table>
+</div>
+</body>
+</html>

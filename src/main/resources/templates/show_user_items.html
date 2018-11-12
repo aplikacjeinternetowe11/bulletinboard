@@ -7,13 +7,14 @@
 <body>
 <div th:replace="fragments/header :: header"/>
 
-<form th:action="@{'/user/user_profile/'+${user_items[1].user_name}}" method="get">
+
+<form th:action="@{'/user/user_profile/'+${user_name}}" method="get">
     <button class="btn btn-default" type="submit">Powrót do profilu użytkownika</button>
 </form>
 <br/>
 <div>
     <div style="font-weight:bold;display: inline">Ogłoszenia użytkownika:</div>
-    <div style="display: inline" th:text="${user_items[1].user_name}"></div>
+    <div style="display: inline" th:text="${user_name}"></div>
 </div>
 <br/>
 <div th:each="item : ${user_items}">

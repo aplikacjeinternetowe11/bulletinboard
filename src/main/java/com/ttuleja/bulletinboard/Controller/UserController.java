@@ -26,10 +26,14 @@ public class UserController {
                                @RequestParam(value = "password", defaultValue = " ") String password,
                                @RequestParam(value = "phone_number", defaultValue = " ") String phone_number){
 
-        String redirectUrl = "/";
-
-        userService.addUser(username,password,phone_number);
-        return "redirect:" + redirectUrl;
+        if(!(username.equals(" ")) && !(password.equals(" ")) && !(phone_number.equals(" "))){
+            userService.addUser(username,password,phone_number);
+            String redirectUrl = "/";
+            return "redirect:" + redirectUrl;
+        }else {
+            String redirectUrl = "/user/register";
+            return "redirect:" + redirectUrl;
+        }
     }
 
     @RequestMapping(value = "/login",method = RequestMethod.GET)
@@ -37,22 +41,24 @@ public class UserController {
         return "login";
     }
 
-    @RequestMapping(value = "test_dostepu",method = RequestMethod.GET)
-    public String testDostepu(){
-        return "index";
-    }
-
     @RequestMapping(value = "/user_profile/{user_name}",method = RequestMethod.GET)
     public String showUserProfile(@PathVariable("user_name") String userName, Model model){
         model.addAttribute("user_details",userService.getUserDetails(userName));
-        model.addAttribute("user_items",userService.getUserPosts(userName));
 
         return "show_user_profile";
     }
     @RequestMapping(value = "/user_profile/{user_name}/items",method = RequestMethod.GET)
     public String showUserItems(@PathVariable("user_name") String userName, Model model){
-        model.addAttribute("user_items",userService.getUserPosts(userName));
+        model.addAttribute("user_items",userService.getUserItems(userName));
+        model.addAttribute("user_name",userName);
 
         return "show_user_items";
+    }
+
+    @RequestMapping(value = "/user_profile/{user_name}/comments",method = RequestMethod.GET)
+    public String showUserComments(@PathVariable("user_name") String userName, Model model){
+        model.addAttribute("user_comments",userService.getUserComments(userName));
+        model.addAttribute("user_name",userName);
+        return "show_user_comments";
     }
 }

@@ -36,10 +36,14 @@ public class BoardController {
                           @RequestParam(value = "item_price",defaultValue = " ") String itemPrice,
                           @RequestParam(value = "user_name",defaultValue = " ") String userName){
 
-        boardService.addItem(itemName,itemDescription,itemPrice,userName);
-
-        String redirectUrl = "/show_items";
-        return "redirect:" + redirectUrl;
+        if(!(itemName.equals(" ")) && !(itemDescription.equals(" ")) && !(itemPrice.equals(" ")) && !(userName.equals(" "))){
+            boardService.addItem(itemName, itemDescription, itemPrice, userName);
+            String redirectUrl = "/show_items";
+            return "redirect:" + redirectUrl;
+        }else {
+            String redirectUrl = "/add_item";
+            return "redirect:" + redirectUrl;
+        }
     }
 
     @RequestMapping(value = "/show_items", method = RequestMethod.GET)

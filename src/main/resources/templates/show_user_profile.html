@@ -20,9 +20,30 @@
 
 </div>
 <br/>
-<form th:action="@{'/user/user_profile/'+${user_details.user_name}+'/items'}" method="get">
+<form style="display: inline" th:action="@{'/user/user_profile/'+${user_details.user_name}+'/items'}" method="get">
     <button class="btn btn-default" type="submit">Ogłoszenia użytkownika</button>
 </form>
+
+<form style="display: inline" th:action="@{'/user/user_profile/'+${user_details.user_name}+'/comments'}" method="get">
+    <button class="btn btn-default" type="submit">Komentarze użytkownika</button>
+</form>
+
+<div sec:authorize="isAuthenticated()">
+    <form th:action="@{'/comment/add_comment'}" method="post">
+        <input type="hidden" th:name="user_name" th:value="${#httpServletRequest.remoteUser}"/>
+        <input type="hidden" th:name="comment_target" th:value="${user_details.user_name}"/>
+        Skomentuj użytkownika: <br/><textarea class="form-control" style="width: 20%" rows="2" cols="40" name="comment_content"/><br/><br/>
+
+        <div>
+            <button class="btn btn-default" type="submit">Wyślij komentarz</button>
+        </div>
+    </form>
+</div>
+<form></form>
+<div sec:authorize="isAnonymous()">
+    Zaloguj się aby mieć możliwość komentowania użytkowników.
+</div>
+
 
 </body>
 </html>
