@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.regex.Pattern;
+
 @RequestMapping(value = "/user")
 @Controller
 public class UserController {
@@ -28,15 +30,21 @@ public class UserController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String registerUser(@RequestParam(value = "username", defaultValue = " ") String username,
                                @RequestParam(value = "password", defaultValue = " ") String password,
-                               @RequestParam(value = "phone_number", defaultValue = " ") String phone_number){
+                               @RequestParam(value = "phone_number", defaultValue = " ") String phone_number,Model model){
 
-        if(!(username.equals(" ")) && !(password.equals(" ")) && !(phone_number.equals(" "))){
+        boolean checkUserName = this.userService.checkUserName(username);
+
+        Pattern p = Pattern.compile("[a-zA-Z0-9]*");
+        Pattern phonePattern = Pattern.compile("[0-9]*");
+
+        if(!checkUserName && p.matcher(username).matches() && p.matcher(password).matches() && phonePattern.matcher(phone_number).matches() && !(username.equals(" ")) && !(password.equals(" ")) && !(phone_number.equals(" "))){
             userService.addUser(username,password,phone_number);
-            String redirectUrl = "/";
-            return "redirect:" + redirectUrl;
+            model.addAttribute("registered", "1");
+            return "login";
         }else {
-            String redirectUrl = "/user/register";
-            return "redirect:" + redirectUrl;
+            int error1 = 1;
+            model.addAttribute("error", error1);
+            return "register";
         }
     }
 

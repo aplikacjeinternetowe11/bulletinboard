@@ -6,9 +6,12 @@
 </head>
 <body>
 <div th:replace="fragments/header :: header"/>
-<h1 sec:authorize="isAnonymous()">
-    Witaj! Zarejestruj się!
+<h1 style="color: red" th:if="${error} == 1">
+    Podano błędne dane lub nazwa użytkownika jest zajęta!
 </h1>
+<h2 sec:authorize="isAnonymous()" th:if="${error} == 0">
+    Witaj! Zarejestruj się!
+</h2>
 <form sec:authorize="isAnonymous()" method="post">
     Nazwa użytkownika: <input type="text" class="form-control" style="width: 20%" name="username"/><br/>
     Hasło: <input type="password" class="form-control" style="width: 20%" name="password"/><br/>

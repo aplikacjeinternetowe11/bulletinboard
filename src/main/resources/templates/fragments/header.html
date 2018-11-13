@@ -12,7 +12,9 @@
     <ol class="breadcrumb bread-primary ">
     <a th:href="@{/}">
         <button class="btn btn-primary">Strona główna</button></a>
-    <a sec:authorize="isAuthenticated()" th:href="@{/add_item}">
+    <a sec:authorize="isAuthenticated()" th:href="@{'/user/user_profile/'+${#httpServletRequest.remoteUser}}">
+        <button class="btn btn-primary">Mój profil</button></a>
+        <a sec:authorize="isAuthenticated()" th:href="@{/add_item}">
         <button class="btn btn-primary">Dodaj ogłoszenie</button></a>
     <a th:href="@{/show_items}">
         <button class="btn btn-primary">Lista ogłoszeń</button></a>

@@ -6,6 +6,9 @@
 </head>
 <body>
 <div th:replace="fragments/header :: header"/>
+<h1 style="color: green" th:if="${registered} == 1">
+    Pomyślnie zarejestrowano. Teraz możesz się zalogować!
+</h1>
 <div th:if="${param.error}">
     <h1 style="color:red">Nazwa użytkownika lub hasło nieprawidłowe. Spróbuj jeszcze raz.</h1>
 </div>

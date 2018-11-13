@@ -15,7 +15,9 @@
         <td>Numer telefonu:</td>
     </tr>
     <tr>
-        <td style="width: 25%" th:href="@{'/user/user_profile/'+${item_description.user_name}}" th:text="${item_description.user_name}"></td>
+        <td style="width: 25%">
+            <a th:href="@{'/user/user_profile/'+${item_description.user_name}}" th:text="${item_description.user_name}"></a>
+        </td>
         <td style="width: 10%" th:text="${item_description.item_price}+zł"></td>
         <td style="width: 25%" th:text="${item_description.date}"></td>
         <td style="width: 40%" max-height="100px">
