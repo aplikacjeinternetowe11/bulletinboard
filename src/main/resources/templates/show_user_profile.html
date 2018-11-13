@@ -25,12 +25,12 @@
 </form>
 
 <form style="display: inline" th:action="@{'/user/user_profile/'+${user_details.user_name}+'/comments'}" method="get">
-    <button class="btn btn-default" type="submit">Komentarze użytkownika</button>
+    <button class="btn btn-default" type="submit">Komentarze o użytkowniku</button>
 </form>
 <form></form><form></form>
 <div style="display: inline">
     <span style="font-weight: bold; display: inline">
-        Średnia ocen użytkownika:
+        Średnia ocena użytkownika:
     </span>
     <div style="display: inline;" th:if="${average_rating} == null">
         <div style="display: inline;" th:text="brak"></div>
