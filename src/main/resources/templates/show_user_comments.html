@@ -34,8 +34,14 @@
             <td colspan="5" th:text="${comment.comment_content}"></td>
         </tr>
 
-<br/>
+        <br/>
     </table>
+    <form sec:authorize="hasRole('ROLE_ADMIN')" th:action="@{'/admin/delete/comment'}" method="post">
+        <input type="hidden" th:value="${comment.comment_id}" th:name="id"/>
+        <input type="hidden" th:value="${comment.comment_target}" th:name="comment_target"/>
+        <button class="btn btn-default" type="submit">Usuń</button>
+        <br/>
+    </form>
 </div>
 </body>
 </html>

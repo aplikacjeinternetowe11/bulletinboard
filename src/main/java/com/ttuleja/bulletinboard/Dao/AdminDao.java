@@ -14,4 +14,9 @@ public class AdminDao {
         String sql = "DELETE FROM item WHERE item_id=?";
         jdbcTemplate.update(sql, id);
     }
+
+    public void deleteComment(String id) {
+        String sql = "DELETE FROM comment WHERE comment_id=?";
+        jdbcTemplate.update(sql,id);
+    }
 }

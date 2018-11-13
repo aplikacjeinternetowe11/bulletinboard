@@ -1,5 +1,6 @@
 package com.ttuleja.bulletinboard.Controller;
 
+import com.ttuleja.bulletinboard.Service.RatingService;
 import com.ttuleja.bulletinboard.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private RatingService ratingService;
 
     @RequestMapping(value = "/register",method = RequestMethod.GET)
     public String registerUserPanel(){
@@ -44,6 +48,7 @@ public class UserController {
     @RequestMapping(value = "/user_profile/{user_name}",method = RequestMethod.GET)
     public String showUserProfile(@PathVariable("user_name") String userName, Model model){
         model.addAttribute("user_details",userService.getUserDetails(userName));
+        model.addAttribute("average_rating",ratingService.getUserRating(userName));
 
         return "show_user_profile";
     }

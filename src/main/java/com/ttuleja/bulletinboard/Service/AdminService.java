@@ -12,4 +12,8 @@ public class AdminService {
     public void deleteItem(String id) {
         this.adminDao.deleteItem(id);
     }
+
+    public void deleteComment(String id) {
+        this.adminDao.deleteComment(id);
+    }
 }

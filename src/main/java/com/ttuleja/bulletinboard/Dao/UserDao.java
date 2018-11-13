@@ -47,7 +47,7 @@ public class UserDao {
     }
 
     public Collection<Comment> getUserComments(String userName) {
-        String sql  = "SELECT * FROM comment WHERE comment_target=?";
+        String sql  = "SELECT * FROM comment WHERE comment_target=? ORDER BY comment_date DESC";
         Collection<Comment> userComments;
         userComments = (Collection<Comment>) jdbcTemplate.query(sql, new BeanPropertyRowMapper(Comment.class),userName);
         return userComments;
