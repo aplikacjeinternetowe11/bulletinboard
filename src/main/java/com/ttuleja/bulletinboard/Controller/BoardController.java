@@ -21,6 +21,7 @@ import javax.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 @Controller
 public class BoardController {
@@ -46,6 +47,9 @@ public class BoardController {
 
     @RequestMapping(value = "/add_item")
     public String addItemPanel(){
+        String relativeWebPath = "/";
+        String upload_dir = context.getRealPath(relativeWebPath);
+        System.out.println(upload_dir);
         return "add_item";
 
     }
@@ -59,8 +63,12 @@ public class BoardController {
         // private static String upload_dir = "/static/";
         String relativeWebPath = "/";
         String upload_dir = context.getRealPath(relativeWebPath);
+        System.out.println(upload_dir);
 
-        if(!(itemName.equals(" ")) && !(itemDescription.equals(" ")) && !(itemPrice.equals(" ")) && !(userName.equals(" "))){
+        Pattern pricePattern= Pattern.compile("[0-9]*");
+
+
+        if(pricePattern.matcher(itemPrice).matches() && !(itemName.equals(" ")) && !(itemDescription.equals(" ")) && !(itemPrice.equals(" ")) && !(userName.equals(" "))){
             boardService.addItem(itemName, itemDescription, itemPrice, userName);
 
             int maxItemId = boardService.getMaxItemId();
@@ -75,7 +83,6 @@ public class BoardController {
                         file.transferTo(new java.io.File(upload_dir + imageName));
                         i++;
                         fileNames.add(file.getOriginalFilename());
-
                         imageService.addImageNameToDatabase(imageName,maxItemId);
 
                         //imageService.addImageNames();
