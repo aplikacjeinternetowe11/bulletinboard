@@ -19,4 +19,9 @@ public class AdminDao {
         String sql = "DELETE FROM comment WHERE comment_id=?";
         jdbcTemplate.update(sql,id);
     }
+
+    public void deleteImage(String id) {
+        String sql = "DELETE FROM image WHERE item_id=?";
+        jdbcTemplate.update(sql,id);
+    }
 }

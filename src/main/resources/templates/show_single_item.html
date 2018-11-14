@@ -42,6 +42,14 @@
         <td colspan="6" th:text="${item_description.item_description}"></td>
     </tr>
 
+
+</table>
+<table style="width: 60%">
+    <tr>
+<td style="width: 60%; padding: 5px; height: 400px;" th:each="image : ${image_names}">
+        <img th:src="@{'~/'+${image.image_name}}"/>
+</td>
+    </tr>
 </table>
 <form sec:authorize="hasRole('ROLE_ADMIN')" th:action="@{'/admin/delete/item'}" method="post">
     <input type="hidden" th:value="${item_description.item_id}" th:name="id"/>

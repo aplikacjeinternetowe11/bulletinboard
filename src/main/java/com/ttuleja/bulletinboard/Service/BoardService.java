@@ -23,4 +23,8 @@ public class BoardService {
     public Item showItemDescription(int id) {
         return this.boardDao.showItemDescription(id);
     }
+
+    public int getMaxItemId() {
+        return this.boardDao.getMaxItemId();
+    }
 }

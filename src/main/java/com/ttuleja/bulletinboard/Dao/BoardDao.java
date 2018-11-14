@@ -33,4 +33,11 @@ public class BoardDao {
         item1 = (Item) jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper(Item.class),id);
         return item1;
     }
+
+    public int getMaxItemId() {
+        String sql = "SELECT max(item_id) FROM item";
+        int maxId;
+        maxId = jdbcTemplate.queryForObject(sql, new Object[]{}, Integer.class);
+        return maxId;
+    }
 }
