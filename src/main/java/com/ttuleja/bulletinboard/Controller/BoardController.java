@@ -58,12 +58,9 @@ public class BoardController {
                           @RequestParam(value = "item_description",defaultValue = " ") String itemDescription,
                           @RequestParam(value = "item_price",defaultValue = " ") String itemPrice,
                           @RequestParam(value = "user_name",defaultValue = " ") String userName,
-                          @ModelAttribute File form, ModelMap model, HttpSession session){
+                          @RequestParam(value = "image_list",defaultValue = " ") String imageList,
+                          @ModelAttribute File form, ModelMap model, HttpSession session) {
 
-        // private static String upload_dir = "/static/";
-        String relativeWebPath = "/";
-        String upload_dir = context.getRealPath(relativeWebPath);
-        System.out.println(upload_dir);
 
         Pattern pricePattern= Pattern.compile("[0-9]*");
 
@@ -71,25 +68,18 @@ public class BoardController {
         if(pricePattern.matcher(itemPrice).matches() && !(itemName.equals(" ")) && !(itemDescription.equals(" ")) && !(itemPrice.equals(" ")) && !(userName.equals(" "))){
             boardService.addItem(itemName, itemDescription, itemPrice, userName);
 
-            int maxItemId = boardService.getMaxItemId();
-            ArrayList<String> fileNames = null;
-            if(form.getAlbums().length>0) {
-                fileNames = new ArrayList<String>();
-                int i = 1;
-                for(MultipartFile file:form.getAlbums()) {
-
-                    try {
-                        String imageName = maxItemId + "_" + i + ".jpg";
-                        file.transferTo(new java.io.File(upload_dir + imageName));
-                        i++;
-                        fileNames.add(file.getOriginalFilename());
-                        imageService.addImageNameToDatabase(imageName,maxItemId);
-
-                        //imageService.addImageNames();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+            if (!(imageList.equals(" "))) {
+                String[] imgList = imageList.split("https");
+                System.out.println("dlugosc przed:" + imgList.length);
+                for (int i = 1; i < imgList.length; i++) {
+                    System.out.println(imgList[i]);
+                    imgList[i] = "https".concat(imgList[i]);
+                    System.out.println(imgList[i]);
                 }
+                System.out.println("dlugosc po:" + imgList.length);
+                int itemId = boardService.getMaxItemId();
+                imageService.addImageLinkToDatabase(imgList,itemId);
+
             }
 
 

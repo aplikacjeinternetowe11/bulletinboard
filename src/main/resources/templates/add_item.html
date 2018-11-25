@@ -3,18 +3,128 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Dodaj ogłoszenie</title>
+    <style>
+        .jumbotron h1, .jumbotron p {
+            padding-left: 60px;
+            padding-right: 60px;
+        }
+        .col-md {
+            margin: 0 auto;
+            max-width: 500px
+        }
+        .dropzone {
+            border: 4px dashed #ccc;
+            height: 200px;
+            margin: 0 10px;
+            position: relative;
+            width: auto;
+        }
+        .dropzone p {
+            height: 100%;
+            line-height: 200px;
+            margin: 0;
+            text-align: center;
+            width: 100%;
+        }
+        .dropzone input[type="file"] {
+            height: 100%;
+            left: 0;
+            outline: none;
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            width: 100%;
+        }
+        .dropzone + .status {
+            border-radius: 5px;
+            margin: 10px 10px 0;
+            padding: 15px;
+            text-align: center;
+        }
+        .dropzone.dropzone-dragging {
+            border-color: black
+        }
+        .loading-modal {
+            background-color: rgba(255, 255, 255, .8);
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+        }
+        .loading-image {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin: -16px 0 0 -16px
+        }
+        body.busy .loading-modal {
+            display: block;
+        }
+    </style>
+
 </head>
 <body>
 <div th:replace="fragments/header :: header"/>
-
 <div sec:authorize="isAuthenticated()">
+<div class="dropzone"></div>
+
+
+<script type="text/javascript" src="../css/javascript/imgur.min.js"></script>
+<script type="text/javascript">
+    var imageList = new Array;
+    var imgList = "";
+    var pos = 0;
+    function imageList1(){
+        console.log(imgList);
+        alert(imgList);
+        document.getElementById('imgList').innerHTML = imgList;
+    }
+    //function printImageUrl() {
+        urlString = "";
+        //for (var key in imageList) {
+        //    // urlString += "<br/>"+ imageList[key] + "<br/>" +"<a href='"+imageList[key]+"'> </a>";
+        //    urlString += "<p>"+imageList[key]+" </p>";
+        //}
+       // document.getElementById('urlImages').innerHTML = urlString;
+   // }
+    var feedback = function (res) {
+        if (res.success === true) {
+            var status = document.querySelector('.status');
+            var p = document.createElement('p');
+            var t = document.createTextNode('Image url: ' + res.data.link);
+            //document.getElementById("sImage").value = res.data.link;
+            imgList += res.data.link;
+            pos = pos + 1;
+            p.appendChild(t);
+            //status.classList.add('bg-success');
+            status.appendChild(p);
+            // document.querySelector('.status').innerHTML = 'Image url: ' + res.data.link;
+            //printImageUrl();
+            document.getElementById('imgList').value = imgList;
+        }
+    };
+    new Imgur({
+        clientid: '3760a81c9e75263',
+        callback: feedback
+    });
+
+
+</script>
+
+<div id="urlImages"></div>
+
+
     <form method="post" enctype="multipart/form-data">
+        <input id="imgList" type="hidden" th:name="image_list"/>
+
         <input type="hidden" th:name="user_name" th:value="${#httpServletRequest.remoteUser}"/>
         Nazwa przedmiotu: <br/><textarea class="form-control" style="width: 20%" rows="2" cols="40" name="item_name"/><br/><br/>
         Opis przedmiotu: <br/><textarea class="form-control" style="width: 40%" rows="12" cols="75" name="item_description"/><br/><br/>
         Cena przedmiotu: <br/><textarea class="form-control" style="width: 20%" rows="1" cols="20" name="item_price"/><br/><br/>
 
-        <input type="file" name="albums" multiple="multiple"/>
 
         <div style="padding-top: 10px ">
             <button class="btn btn-default" type="submit">Wyślij ogłoszenie</button>

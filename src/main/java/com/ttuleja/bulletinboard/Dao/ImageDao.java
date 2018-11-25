@@ -12,9 +12,13 @@ import java.util.Collection;
 public class ImageDao {
     @Autowired
     private JdbcTemplate jdbcTemplate;
-    public void addImageNameToDatabase(String imageName, int maxItemId) {
+    public void addImageLinkToDatabase(String[] imgList, int itemId) {
         String sql = "INSERT INTO image (image_name,item_id) VALUES (?,?)";
-        jdbcTemplate.update(sql, new Object[]{imageName,maxItemId});
+        System.out.println("test"+imgList[0]);
+        for(int i=1;i<imgList.length;i++) {
+            System.out.println("test:" + imgList[i]);
+            jdbcTemplate.update(sql, new Object[]{imgList[i], itemId});
+        }
     }
 
     public Collection<Image> getImageName(String id) {

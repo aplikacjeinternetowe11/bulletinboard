@@ -12,8 +12,10 @@ import java.util.Collection;
 public class ImageService {
     @Autowired
     private ImageDao imageDao;
-    public void addImageNameToDatabase(String imageName, int maxItemId) {
-        imageDao.addImageNameToDatabase(imageName, maxItemId);
+    public void addImageLinkToDatabase(String[] imgList, int itemId) {
+        System.out.println("test"+imgList[0]);
+
+        imageDao.addImageLinkToDatabase(imgList, itemId);
 
     }
 
